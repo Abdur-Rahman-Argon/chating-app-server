@@ -243,6 +243,15 @@ async function run() {
       res.send(result);
     });
 
+    // get chat message
+    app.get("/getMessages/:Id", async (req, res) => {
+      const id = req.params.Id;
+      const query = { conversionId: id };
+      const cursor = await messageCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
