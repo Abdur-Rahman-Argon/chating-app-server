@@ -70,6 +70,14 @@ async function run() {
       res.send(result);
     });
 
+    // My Profile information
+    app.get("/user/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      const result = await userCollection.findOne(query);
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
