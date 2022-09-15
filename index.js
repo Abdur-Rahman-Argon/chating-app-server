@@ -299,6 +299,15 @@ async function run() {
       res.send(result);
     });
 
+    // // get conversation
+    app.get("/oneGroupConversation/:Id", async (req, res) => {
+      const id = req.params.Id;
+      const likes = req.body;
+      const query = { _id: ObjectId(id) };
+      const cursor = await groupConversationCollection.findOne(query);
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
