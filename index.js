@@ -290,6 +290,15 @@ async function run() {
       res.send(result);
     });
 
+    // get message
+    app.get("/getGroupMessages/:Id", async (req, res) => {
+      const id = req.params.Id;
+      const query = { conversionId: id };
+      const cursor = await groupMessageCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
