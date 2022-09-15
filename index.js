@@ -252,6 +252,20 @@ async function run() {
       res.send(result);
     });
 
+    // ------------------GroupMessage-------------------------
+
+    // create conversation
+    app.post("/createGroupConversation", async (req, res) => {
+      const data = req.body;
+      const post = {
+        members: data.members,
+        admins: data.admins,
+        groupName: data.groupName,
+      };
+      const result = await groupConversationCollection.insertOne(post);
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
