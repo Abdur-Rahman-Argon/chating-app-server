@@ -108,6 +108,20 @@ async function run() {
       res.send(result);
     });
 
+    // update contact
+    app.put("/contact/:id", async (req, res) => {
+      const id = req.params.id;
+      const { phoneNumber, Address } = req.body;
+      const query = { _id: ObjectId(id) };
+      const updateDocument = {
+        $set: {
+          contact: { phoneNumber, Address },
+        },
+      };
+      const result = await userCollection.updateOne(query, updateDocument);
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
