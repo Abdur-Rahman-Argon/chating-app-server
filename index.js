@@ -61,6 +61,15 @@ async function run() {
       res.send(result);
     });
 
+    //View One Unique User
+    app.get("/viewUser/:userId", async (req, res) => {
+      const id = req.params.userId;
+      // console.log(id);
+      const query = { _id: ObjectId(id) };
+      const result = await userCollection.findOne(query);
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
