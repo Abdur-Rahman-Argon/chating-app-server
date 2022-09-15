@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -19,15 +19,26 @@ async function run() {
   try {
     await client.connect();
     const collection = client.db("test").collection("devices");
+
     const userCollection = client.db("Users").collection("UserCollection");
 
-    app.get("/users", async (req, res) => {
-      const query = {};
-      const cursor = await userCollection.find(query);
-      const result = await cursor.toArray(result);
-      res.send(result);
-    });
+    const postCollection = client.db("Users").collection("PostCollection");
 
+    const conversationCollection = client
+      .db("Messages")
+      .collection("conversation");
+    const messageCollection = client.db("Messages").collection("message");
+
+    const groupConversationCollection = client
+      .db("GroupMessages")
+      .collection("groupConversation");
+    const groupMessageCollection = client
+      .db("GroupMessages")
+      .collection("groupMessage");
+
+    //------------------- View-others-Users--------------------
+
+    // Create new user
     app.put("/users/:email", async (req, res) => {
       const user = req.body;
       const filter = { email: user.email };
@@ -41,6 +52,16 @@ async function run() {
 
       res.send({ result, status: 200, success: true });
     });
+
+    //Get All User
+    app.get("/users", async (req, res) => {
+      const query = {};
+      const cursor = await userCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    // ------------------Post--------------------------------
 
     //
   } finally {
