@@ -122,6 +122,23 @@ async function run() {
       res.send(result);
     });
 
+    // update Contact
+    app.patch("/contactUpdate/:id", async (req, res) => {
+      const id = req.params.id;
+      const contact = req.body;
+      const query = { _id: ObjectId(id) };
+      const updateDocument = {
+        $set: {
+          contact: contact,
+        },
+      };
+      const result = await userCollection.updateOne(query, updateDocument);
+      res.send(result);
+    });
+
+    // update Contact
+    // update Contact
+
     // ------------------Post--------------------------------
 
     //
