@@ -141,6 +141,16 @@ async function run() {
 
     // ------------------Post--------------------------------
 
+    //create new post
+    app.post("/createPost", async (req, res) => {
+      const data = req.body;
+      const post = data;
+      const result = await postCollection.insertOne(post);
+      res.send(result);
+    });
+
+    // ------------------Post--------------------------------
+
     //
   } finally {
     // await client.close();
