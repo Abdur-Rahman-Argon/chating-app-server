@@ -220,6 +220,15 @@ async function run() {
       res.send(result);
     });
 
+    // get conversation
+    app.get("/oneConversation/:Id", async (req, res) => {
+      const id = req.params.Id;
+      const likes = req.body;
+      const query = { _id: ObjectId(id) };
+      const cursor = await conversationCollection.findOne(query);
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
