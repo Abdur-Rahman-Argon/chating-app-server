@@ -166,6 +166,18 @@ async function run() {
       res.send(result);
     });
 
+    // Like a post
+    app.patch("/likeAdd/:postId", async (req, res) => {
+      const id = req.params.postId;
+      const likes = req.body;
+      const query = { _id: ObjectId(id) };
+      const updateDocument = {
+        $push: { likes: likes },
+      };
+      const result = await postCollection.updateOne(query, updateDocument);
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
