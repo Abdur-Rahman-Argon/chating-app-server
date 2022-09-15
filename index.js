@@ -178,6 +178,18 @@ async function run() {
       res.send(result);
     });
 
+    // comment update
+    app.patch("/commentAdd/:postId", async (req, res) => {
+      const id = req.params.postId;
+      const comment = req.body;
+      const query = { _id: ObjectId(id) };
+      const updateDocument = {
+        $push: { comments: comment },
+      };
+      const result = await postCollection.updateOne(query, updateDocument);
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
