@@ -201,6 +201,16 @@ async function run() {
       res.send(result);
     });
 
+    // ------------------Message------------------------------
+
+    // create conversation
+    app.post("/createConversation", async (req, res) => {
+      const data = req.body;
+      const post = { member: [data.senderId, data.receiverId] };
+      const result = await conversationCollection.insertOne(post);
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
