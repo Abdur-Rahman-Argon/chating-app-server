@@ -141,11 +141,19 @@ async function run() {
 
     // ------------------Post--------------------------------
 
-    //create new post
+    //create new blog post
     app.post("/createPost", async (req, res) => {
       const data = req.body;
       const post = data;
       const result = await postCollection.insertOne(post);
+      res.send(result);
+    });
+
+    // get all post
+    app.get("/allPost", async (req, res) => {
+      const query = {};
+      const cursor = await postCollection.find(query);
+      const result = await cursor.toArray();
       res.send(result);
     });
 
