@@ -70,6 +70,22 @@ async function run() {
       res.send(result);
     });
 
+    // ----------------------my-profile-&-Update---------------
+
+    // update Heading
+    app.put("/Heading/:id", async (req, res) => {
+      const id = req.params.id;
+      const { profileHeading, profileBio } = req.body;
+      const query = { _id: ObjectId(id) };
+      const updateDocument = {
+        $set: {
+          Heading: { profileHeading, profileBio },
+        },
+      };
+      const result = await userCollection.updateOne(query, updateDocument);
+      res.send(result);
+    });
+
     // My Profile information
     app.get("/user/:email", async (req, res) => {
       const email = req.params.email;
