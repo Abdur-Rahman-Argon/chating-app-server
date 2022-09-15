@@ -266,6 +266,15 @@ async function run() {
       res.send(result);
     });
 
+    // get conversation
+    app.get("/getGroupConversation/:userId", async (req, res) => {
+      const senderId = req.params.userId;
+      const query = { members: { $in: [senderId] } };
+      const cursor = await groupConversationCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
