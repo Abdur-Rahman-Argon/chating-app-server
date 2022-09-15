@@ -157,6 +157,15 @@ async function run() {
       res.send(result);
     });
 
+    //get Love Post
+    app.get("/MyPost/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email };
+      const cursor = await postCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
