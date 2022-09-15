@@ -211,6 +211,15 @@ async function run() {
       res.send(result);
     });
 
+    // get conversation
+    app.get("/getConversation/:userId", async (req, res) => {
+      const senderId = req.params.userId;
+      const query = { member: { $in: [senderId] } };
+      const cursor = await conversationCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
