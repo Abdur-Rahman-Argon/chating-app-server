@@ -229,6 +229,20 @@ async function run() {
       res.send(result);
     });
 
+    // create new massage
+    app.post("/createMessage", async (req, res) => {
+      const data = req.body;
+      const message = {
+        conversionId: data.conversionId,
+        senderId: data.senderId,
+        senderInfo: data.senderInfo,
+        textMessage: data.textMessage,
+        sendTime: data.sendTime,
+      };
+      const result = await messageCollection.insertOne(data);
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
