@@ -275,6 +275,21 @@ async function run() {
       res.send(result);
     });
 
+    // create group massage
+    app.post("/createGroupMessage", async (req, res) => {
+      const data = req.body;
+      const message = {
+        conversionId: data.conversionId,
+        senderId: data.senderId,
+        senderInfo: data.senderInfo,
+        textMessage: data.textMessage,
+        imageUrl: data.imageUrl,
+        sendTime: data.sendTime,
+      };
+      const result = await groupMessageCollection.insertOne(data);
+      res.send(result);
+    });
+
     // ------------------Post--------------------------------
 
     //
